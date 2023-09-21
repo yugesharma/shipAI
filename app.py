@@ -1,4 +1,5 @@
-
+import streamlit as st
+st.set_page_config(page_title="ShipAI 🚢")
 from langchain.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -7,7 +8,6 @@ from sentence_transformers import SentenceTransformer
 from langchain.chains.question_answering import load_qa_chain
 import pinecone
 import os
-import streamlit as st
 
 from huggingface_hub import hf_hub_download
 from langchain.chains.question_answering import load_qa_chain
@@ -21,7 +21,6 @@ def main():
     os.environ["OPENAI_API_KEY"]==st.secrets["OPENAI_API_KEY"]
 
     #setting up UI
-    st.set_page_config(page_title="ShipAI 🚢")
     st.header("Ask your AI ship mate 👨‍✈️🚢 ")
 
 
