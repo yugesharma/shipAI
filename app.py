@@ -1,5 +1,4 @@
 
-from dotenv import load_dotenv
 from langchain.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -18,7 +17,8 @@ from langchain.callbacks import get_openai_callback
 
 def main():
 
-    load_dotenv()
+    os.environ["HUGGINGFACEHUB_API_TOKEN"]==st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    os.environ["OPENAI_API_KEY"]==st.secrets["OPENAI_API_KEY"]
 
     #setting up UI
     st.set_page_config(page_title="ShipAI 🚢")
