@@ -8,95 +8,97 @@ ShipAI 🚢
 
 ShipAI is an advanced AI-driven solution designed to empower you with maritime knowledge. Whether you have questions about SOLAS, MARPOL, or any topic within the maritime domain, ShipAI harnesses the capabilities of vector databases, embeddings, transformers, and OpenAI to deliver accurate and insightful answers, making maritime exploration more accessible and efficient.
 
-    Introduction
-    Demo
-    Features
-    Getting Started
-        Prerequisites
-        Installation
-    Usage
-    Contributing
-    License
+   Introduction
+   Demo
+   Features
+   Getting Started
+       Prerequisites
+       Installation
+   Usage
+   Contributing
+   License
 
-Introduction
+# Introduction
 
 The maritime domain is vast and complex, and extracting information from it can be challenging. ShipAI simplifies this process by allowing you to ask questions about plethora of regulations, resulting in saving time and it provides you with relevant answers.
-Features
 
-    Ask questions related to the maritime domain.
-    Utilize vector databases to search for relevant documents.
-    Use embeddings and transformers to understand and analyze text.
-    Incorporate OpenAI's capabilities for question answering.
 
-Demo
+# Demo
 
 <div align="center">
   <img src="https://github.com/yugesharma/shipAI/blob/main/shipai.gif" width="1000" height="600"/>
 </div>
 
 
-
 <a href='https://shipai.streamlit.app'>Link to web app<a>
 
 
 
-Getting Started
-Prerequisites
+# Getting Started
+## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-    Python 3.7 or higher installed.
-    A Pinecone API key and environment setup.
-    Necessary secrets for Hugging Face and OpenAI APIs.
+   Python 3.7 or higher installed.
+   A Pinecone API key and environment setup.
+   Necessary secrets for Hugging Face and OpenAI APIs.
 
-Installation
+## Installation
 
-    Clone the repository:
+Follow these steps to set up ShipAI on your local machine:
 
-    bash
+  1. Clone the repository:
 
+   ```bash
 git clone https://github.com/yourusername/ShipAI.git
 cd ShipAI
+```
 
-Create a virtual environment and activate it:
+ 2. Create a virtual environment and activate it:
 
-bash
+```python
 
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```
 
-Install the required packages:
+ 3. Install the required packages:
 
-bash
+```python
 
-    pip install -r requirements.txt
+pip install -r requirements.txt
+```
 
-    Set up your environment variables for Pinecone, Hugging Face, and OpenAI API keys.
+ 4. Set Environment Variables:
 
-Usage
+ Ensure you set up the necessary environment variables for Pinecone, Hugging Face, and OpenAI API keys
+    
 
-    Run the application:
+# Usage
 
-    bash
+   1. Run the application:
 
-    streamlit run shipai.py
+  ```python
 
-    Access the application in your web browser.
+  streamlit run shipai.py
+  ```
 
-    Enter your questions related to the maritime domain in the provided text input.
+   2. Access the application in your web browser.
 
-    ShipAI will process your question, search the vector database, and provide you with answers and insights.
+   3. Enter your questions related to the maritime domain in the provided text input.
 
-Contributing
+   4. ShipAI will process your question, search the vector database, and provide you with answers and insights.
+
+# Contributing
 
 Contributions are welcome! If you want to contribute to ShipAI, please follow these steps:
 
-    Fork the repository.
-    Create a new branch: git checkout -b feature/new-feature.
-    Make your changes and commit them: git commit -m 'Add new feature'.
-    Push to the branch: git push origin feature/new-feature.
-    Submit a pull request.
+  1.  Fork the repository.
+  2.  Create a new branch: git checkout -b feature/new-feature.
+  3.  Make your changes and commit them: git commit -m 'Add new feature'.
+  4.  Push to the branch: git push origin feature/new-feature.
+  5.  Submit a pull request.
 
-License
+# License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License
