@@ -26,7 +26,7 @@ The maritime domain is vast and complex, and extracting information from it can 
 # Demo
 
 <div align="center">
-  <img src="https://github.com/yugesharma/shipAI/blob/main/shipai.gif" width="1000" height="600"/>
+  <img src="https://github.com/yugesharma/shipAI/blob/main/shipai.gif" width="2000" height="600"/>
 </div>
 
 
