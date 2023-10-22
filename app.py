@@ -47,11 +47,21 @@ def main():
         docs=docsearch.similarity_search(query)
 
         llm=ChatOpenAI()
-        chain = load_qa_chain(llm, chain_type="stuff", reduce_k_below_max_tokens=True)
-        with get_openai_callback() as cb:
-            response = chain.run(input_documents=docs, question=query)
-            print(cb)
-        st.write(response)
+        chain = load_qa_chain(llm, chain_type="stuff")
+
+        conversation_parts = [
+            {"role": "system", "content": "You are a helpful assistant."}
+        ]
+        
+        conversation_parts.append({"role": "user", "content": query})
+        
+        for doc in docs:
+            response = chain.run(input_documents=[doc], question=query)
+            conversation_parts.append({"role": "assistant", "content": response})
+        
+        st.write("AI Responses:")
+        for part in conversation_parts:
+            st.write(part["content"])
 
 if __name__ == '__main__':
      main()
