@@ -48,10 +48,13 @@ def main():
 
         llm=ChatOpenAI()
         chain = load_qa_chain(llm, chain_type="stuff")
-        with get_openai_callback() as cb:
-            response = chain.run(input_documents=docs, question=query)
-            print(cb)
-        st.write(response)
+        try:
+            with get_openai_callback() as cb:
+                response = chain.run(input_documents=docs, question=query)
+        except openai.error.InvalidRequestError as e:
+            st.error("Error:Answer to long. Try asking a more brief question.")
+        else:
+            st.write(response)
 
 if __name__ == '__main__':
      main()
