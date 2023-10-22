@@ -47,7 +47,7 @@ def main():
         docs=docsearch.similarity_search(query)
 
         llm=ChatOpenAI()
-        chain = load_qa_chain(llm, chain_type="stuff")
+        chain = load_qa_chain(llm, chain_type="stuff", reduce_k_below_max_tokens=True)
         with get_openai_callback() as cb:
             response = chain.run(input_documents=docs, question=query)
             print(cb)
