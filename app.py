@@ -41,20 +41,21 @@ def main():
     docsearch = Pinecone.from_existing_index(index_name, embeddings)
 
     #processing user query
+   try:
+        query = st.text_input("Ask a question here:")
+        if query:
+            docs=docsearch.similarity_search(query)
 
-    query = st.text_input("Ask a question here:")
-    if query:
-        docs=docsearch.similarity_search(query)
-
-        llm=ChatOpenAI()
-        chain = load_qa_chain(llm, chain_type="stuff")
-        try:
+            llm=ChatOpenAI()
+            chain = load_qa_chain(llm, chain_type="stuff")
             with get_openai_callback() as cb:
-                response = chain.run(input_documents=docs, question=query)
-        except openai.error.InvalidRequestError as e:
-            st.error("Error:Answer to long. Try asking a more brief question.")
-        else:
-            st.write(response)
+                response = chain.run(input_documents=docs, question=query, max_tokens=4090)          
+                st.write(response)
+
+
+    except openai.error.OpenAIError as e:
+        st.error("An error occurred while processing your request. Please try again later.")
+        st.write(f"Error details: {str(e)}")
 
 if __name__ == '__main__':
      main()
