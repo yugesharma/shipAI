@@ -41,7 +41,7 @@ def main():
     docsearch = Pinecone.from_existing_index(index_name, embeddings)
 
     #processing user query
-   try:
+    try:
         query = st.text_input("Ask a question here:")
         if query:
             docs=docsearch.similarity_search(query)
