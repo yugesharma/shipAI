@@ -53,7 +53,7 @@ def main():
                 st.write(response)
 
 
-    except openai.error as e:
+    except openai.error.InvalidRequestError as e:
         st.error("An error occurred while processing your request. Please try again later.")
         st.write(f"Error details: {str(e)}")
 
