@@ -20,6 +20,8 @@ def main():
 
     os.environ["HUGGINGFACEHUB_API_TOKEN"]=st.secrets["HUGGINGFACEHUB_API_TOKEN"]
     os.environ["OPENAI_API_KEY"]=st.secrets["OPENAI_API_KEY"]
+    os.environ["PINECONE_API_KEY"]=st.secrets["PINECONE_API_KEY"]
+    os.environ["PINECONE_API_ENV"]=st.secrets["PINECONE_API_ENV"]
 
     #setting up UI
     st.header("Ask your AI ship mate 👨‍✈️🚢 ")
