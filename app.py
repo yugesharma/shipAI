@@ -25,10 +25,6 @@ def main():
     st.header("Ask your AI ship mate 👨‍✈️🚢 ")
 
 
-    #set up environment
-    PINECONE_API_KEY =  '6844b37a-39b9-4ec6-96c4-94c2d1d1d9ec'
-    PINECONE_API_ENV = 'gcp-starter'
-
 
     #pinecone for vector database
     pinecone.init(
