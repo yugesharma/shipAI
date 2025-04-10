@@ -26,11 +26,12 @@ def main():
 
     index="shipdata"
     embeddings=HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
-    
-    loader = DirectoryLoader(f"content", loader_cls=PyPDFLoader, glob="./*.pdf", show_progress=True, use_multithreading=True)
-    data = loader.load()
-    text_splitter=CharacterTextSplitter(chunk_size=2000, chunk_overlap=200, separator="\n\n", length_function=len, add_start_index=True)
-    docs=text_splitter.split_documents(data)
+
+    ## For loading the data
+    # loader = DirectoryLoader(f"content", loader_cls=PyPDFLoader, glob="./*.pdf", show_progress=True, use_multithreading=True)
+    # data = loader.load()
+    # text_splitter=CharacterTextSplitter(chunk_size=2000, chunk_overlap=200, separator="\n\n", length_function=len, add_start_index=True)
+    # docs=text_splitter.split_documents(data)
 
     # docsearch = PineconeVectorStore.from_texts([t.page_content for t in docs], embeddings, index_name="shipdata")
     # st.write('done')
