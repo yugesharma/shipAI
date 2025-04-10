@@ -28,8 +28,8 @@ def main():
 
     #pinecone for vector database
     pinecone.init(
-        api_key=PINECONE_API_KEY,  
-        environment=PINECONE_API_ENV  
+        api_key=st.secrets["PINECONE_API_KEY"],  
+        environment=st.secrets["PINECONE_API_ENV"] 
     )
     embeddings=HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
     index_name="shipdata"
