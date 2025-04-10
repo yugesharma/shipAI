@@ -33,7 +33,7 @@ def main():
         api_key=st.secrets["PINECONE_API_KEY"],  
         environment=st.secrets["PINECONE_API_ENV"] 
     )
-    embeddings=HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
+    embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-mpnet-base-v2')
     index_name="shipdata"
 
     #docsearch=Pinecone.from_texts([t.page_content for t in docs], embeddings, index_name=index_name)
