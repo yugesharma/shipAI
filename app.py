@@ -6,7 +6,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Pinecone
 from sentence_transformers import SentenceTransformer
 from langchain.chains.question_answering import load_qa_chain
-import pinecone
+from pinecone Pinecone
 import os
 
 from huggingface_hub import hf_hub_download
@@ -18,21 +18,20 @@ import openai
 
 def main():
 
-    os.environ["HUGGINGFACEHUB_API_TOKEN"]=st.secrets["HUGGINGFACEHUB_API_TOKEN"]
-    os.environ["OPENAI_API_KEY"]=st.secrets["OPENAI_API_KEY"]
-    os.environ["PINECONE_API_KEY"]=st.secrets["PINECONE_API_KEY"]
-    os.environ["PINECONE_API_ENV"]=st.secrets["PINECONE_API_ENV"]
+    hf_api_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+    pinecone_api_key = st.secrets["PINECONE_API_KEY"]
+    pinecone_env = st.secrets["PINECONE_API_ENV"]
 
     #setting up UI
     st.header("Ask your AI ship mate 👨‍✈️🚢 ")
 
+    st.write("Website is under maintenance due to Pinecone documentation changes. Thank you for your patience")
 
-
+    '''
     #pinecone for vector database
-    pinecone.init(
-        api_key=st.secrets["PINECONE_API_KEY"],  
-        environment=st.secrets["PINECONE_API_ENV"] 
-    )
+     pc = Pinecone(api_key=pinecone_api_key)
+
     embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-mpnet-base-v2')
     index_name="shipdata"
 
@@ -55,6 +54,6 @@ def main():
     except openai.error.InvalidRequestError as e:
         st.error("An error occurred while processing your request. Please try again later.")
         st.write(f"Error details: {str(e)}")
-
+'''
 if __name__ == '__main__':
      main()
