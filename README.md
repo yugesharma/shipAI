@@ -6,7 +6,7 @@ ShipAI 🚢
 </div>
 
 
-ShipAI is an advanced AI-driven solution designed to empower you with maritime knowledge. Whether you have questions about SOLAS, MARPOL, or any topic within the maritime domain, ShipAI harnesses the capabilities of vector databases, embeddings, transformers, and OpenAI to deliver accurate and insightful answers, making maritime exploration more accessible and efficient.
+ShipAI is an advanced AI-driven solution designed to empower you with maritime knowledge. Whether you have questions about SOLAS, MARPOL, or any topic within the maritime domain, ShipAI harnesses the capabilities of vector databases, embeddings, transformers, and Google Gemini to deliver accurate and insightful answers, making maritime exploration more accessible and efficient.
 
    Introduction
    Demo
@@ -39,9 +39,9 @@ The maritime domain is vast and complex, and extracting information from it can 
 
 Before you begin, ensure you have met the following requirements:
 
-   Python 3.7 or higher installed.
+   Python 3.10 or higher installed.
    A Pinecone API key and environment setup.
-   Necessary secrets for Hugging Face and OpenAI APIs.
+   Necessary secrets for Hugging Face and Google Gemini APIs.
 
 ## Installation
 
@@ -69,9 +69,19 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 pip install -r requirements.txt
 ```
 
- 4. Set Environment Variables:
+ 4. Set environment variables for local runs:
 
- Ensure you set up the necessary environment variables for Pinecone, Hugging Face, and OpenAI API keys
+Create a `.env` file in the project root with:
+
+```env
+HUGGINGFACEHUB_API_TOKEN=your_hf_token
+GOOGLE_API_KEY=your_google_key
+PINECONE_API_KEY=your_pinecone_key
+PINECONE_API_ENV=your_pinecone_environment
+SHIPAI_INDEX_NAME=shipdata
+```
+
+For deployed runs on Streamlit Cloud, set the same keys in app secrets (`.streamlit/secrets.toml` in the app settings).
     
 
 # Usage
@@ -80,7 +90,7 @@ pip install -r requirements.txt
 
   ```python
 
-  streamlit run shipai.py
+  streamlit run app.py
   ```
 
    2. Access the application in your web browser.
@@ -88,6 +98,17 @@ pip install -r requirements.txt
    3. Enter your questions related to the maritime domain in the provided text input.
 
    4. ShipAI will process your question, search the vector database, and provide you with answers and insights.
+
+# Local + Deployment Consistency
+
+Use this checklist to keep behavior identical in both environments:
+
+1. Use the same Python version locally and in deployment (recommended: 3.10).
+2. Keep one dependency source of truth: `requirements.txt`.
+3. Keep one app entrypoint everywhere: `streamlit run app.py`.
+4. Use the same config keys in both places:
+   `HUGGINGFACEHUB_API_TOKEN`, `GOOGLE_API_KEY`, `PINECONE_API_KEY`, `PINECONE_API_ENV`, `SHIPAI_INDEX_NAME`.
+5. Point both environments to the same Pinecone index name unless you intentionally isolate environments.
 
 # Contributing
 

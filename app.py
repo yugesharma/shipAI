@@ -1,12 +1,16 @@
-import streamlit as st
-st.set_page_config(page_title="ShipAI")
 import os
+os.environ.setdefault("TRANSFORMERS_NO_TF", "1")
+os.environ.setdefault("USE_TF", "0")
+
+import streamlit as st
+
+st.set_page_config(page_title="ShipAI")
 from typing import Optional
 from streamlit.errors import StreamlitSecretNotFoundError
 from dotenv import load_dotenv
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_pinecone import PineconeVectorStore
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_pinecone import PineconeVectorStore
 
 
 def _get_setting(key: str, default: Optional[str] = None) -> Optional[str]:
@@ -21,14 +25,12 @@ def main():
 
     load_dotenv()
 
-    hf_api_token = _get_setting("HUGGINGFACEHUB_API_TOKEN")
     google_api_key = _get_setting("GOOGLE_API_KEY")
     pinecone_api_key = _get_setting("PINECONE_API_KEY")
     pinecone_env = _get_setting("PINECONE_API_ENV")
     index = _get_setting("SHIPAI_INDEX_NAME", "shipdata")
 
     required_settings = {
-        "HUGGINGFACEHUB_API_TOKEN": hf_api_token,
         "GOOGLE_API_KEY": google_api_key,
         "PINECONE_API_KEY": pinecone_api_key,
         "PINECONE_API_ENV": pinecone_env,
@@ -43,7 +45,6 @@ def main():
         )
         st.stop()
 
-    os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_api_token
     os.environ["PINECONE_API_KEY"] = pinecone_api_key
     os.environ["PINECONE_API_ENV"] = pinecone_env
     os.environ["PINECONE_ENVIRONMENT"] = pinecone_env
@@ -51,7 +52,7 @@ def main():
     #setting up UI
     st.header("Ask your AI ship mate")
 
-    embeddings=HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
     docsearch = PineconeVectorStore.from_existing_index(index_name=index, embedding=embeddings)
 
@@ -59,7 +60,7 @@ def main():
     try:
         query = st.text_input("Ask a question here:")
         if query:
-            docs=docsearch.similarity_search(query)
+            docs=docsearch.similarity_search(query, k=3)
 
             llm = ChatGoogleGenerativeAI(
                 model="gemini-2.5-flash",
@@ -77,6 +78,15 @@ def main():
             with st.spinner("Analyzing maritime records..."):
                 response = llm.invoke(prompt)
                 st.markdown(response.content)
+
+            st.divider()
+            st.subheader("Sources")
+            for i, doc in enumerate(docs):
+                source_name=doc.metadata.get("source", "unknown")
+                page_num=doc.metadata.get("page", "N/A")
+
+                with st.expander(f"Source {i+1}: {source_name} (Page {page_num})"):
+                    st.write(doc.page_content)
     
 
 
